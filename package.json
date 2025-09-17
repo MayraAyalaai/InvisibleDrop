@@ -24,13 +24,13 @@
     "hardhat"
   ],
   "dependencies": {
-    "@fhevm/solidity": "^0.7.0",
+    "@fhevm/solidity": "^0.8.0",
     "@openzeppelin/confidential-contracts": "^0.2.0",
     "@zama-fhe/oracle-solidity": "^0.1.0",
     "encrypted-types": "^0.0.4"
   },
   "devDependencies": {
-    "@fhevm/hardhat-plugin": "^0.0.1-6",
+    "@fhevm/hardhat-plugin": "^0.1.0",
     "@nomicfoundation/hardhat-chai-matchers": "^2.1.0",
     "@nomicfoundation/hardhat-ethers": "^3.1.0",
     "@nomicfoundation/hardhat-network-helpers": "^1.1.0",
@@ -42,7 +42,7 @@
     "@types/node": "^20.19.8",
     "@typescript-eslint/eslint-plugin": "^8.37.0",
     "@typescript-eslint/parser": "^8.37.0",
-    "@zama-fhe/relayer-sdk": "^0.1.2",
+    "@zama-fhe/relayer-sdk": "^0.2.0",
     "chai": "^4.5.0",
     "chai-as-promised": "^8.0.1",
     "cross-env": "^7.0.3",
@@ -97,6 +97,9 @@
     "axios@>=1.0.0 <1.8.2": ">=1.8.2",
     "axios@<0.29.1": ">=0.29.1",
     "cookie@<0.7.0": ">=0.7.0",
-    "minimatch": "^3.1.2"
+    "minimatch": "^3.1.2",
+    "@openzeppelin/confidential-contracts": {
+      "@fhevm/solidity": "^0.8.0"
+    }
   }
 }
