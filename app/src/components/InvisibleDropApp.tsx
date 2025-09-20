@@ -4,10 +4,11 @@ import { useAccount } from 'wagmi';
 import { AirdropManager } from './AirdropManager';
 import { TokenMinter } from './TokenMinter';
 import { AirdropList } from './AirdropList';
+import { BalanceViewer } from './BalanceViewer';
 
 export function InvisibleDropApp() {
   const { isConnected } = useAccount();
-  const [activeTab, setActiveTab] = useState<'airdrops' | 'create' | 'mint'>('airdrops');
+  const [activeTab, setActiveTab] = useState<'airdrops' | 'create' | 'mint' | 'balance'>('airdrops');
 
   return (
     <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
@@ -67,7 +68,8 @@ export function InvisibleDropApp() {
             {[
               { key: 'airdrops', label: '🎯 空投列表' },
               { key: 'create', label: '➕ 创建空投' },
-              { key: 'mint', label: '🪙 铸造代币' }
+              { key: 'mint', label: '🪙 铸造代币' },
+              { key: 'balance', label: '💰 我的余额' }
             ].map(({ key, label }) => (
               <button
                 key={key}
@@ -104,6 +106,7 @@ export function InvisibleDropApp() {
             {activeTab === 'airdrops' && <AirdropList />}
             {activeTab === 'create' && <AirdropManager />}
             {activeTab === 'mint' && <TokenMinter />}
+            {activeTab === 'balance' && <BalanceViewer />}
           </div>
         </div>
       )}

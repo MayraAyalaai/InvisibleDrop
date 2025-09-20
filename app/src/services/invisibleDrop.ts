@@ -45,7 +45,8 @@ export class InvisibleDropService {
   static async createAirdrop(config: AirdropConfig) {
     try {
       const contract = await getContractWrite('InvisibleDrop');
-
+      console.log("createAirdrop:",config);
+      
       const tx = await contract.createAirdrop(
         config.rewardToken,
         config.rewardPerUser,

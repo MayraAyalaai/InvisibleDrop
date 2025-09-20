@@ -253,7 +253,7 @@ export class TokenService {
       case 'ConfidentialCoin2':
         try {
           const contract = await getContractWrite('ConfidentialCoin2');
-          const amountInWei = ethers.parseEther(amount);
+          const amountInWei = parseInt(amount)*1000000;
 
           const tx = await contract.mint(airdropAddress, amountInWei);
           console.log('向空投合约充值 ConfidentialCoin2 交易已提交:', tx.hash);
