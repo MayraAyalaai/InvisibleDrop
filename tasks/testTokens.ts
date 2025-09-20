@@ -61,7 +61,7 @@ task("check-test-token-balance", "Check TestToken balance")
   .setAction(async (taskArgs, hre: HardhatRuntimeEnvironment) => {
     const { address } = taskArgs;
 
-    const testTokenAddress = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9";
+    const testTokenAddress = "0xD6e81e78930259e66a2f4b363D84a6Ec0BeCd2c6";
     const TestToken = await hre.ethers.getContractFactory("TestToken");
     const testToken = TestToken.attach(testTokenAddress);
 
@@ -74,7 +74,7 @@ task("check-test-nft-balance", "Check TestNFT balance and owned tokens")
   .setAction(async (taskArgs, hre: HardhatRuntimeEnvironment) => {
     const { address } = taskArgs;
 
-    const testNFTAddress = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
+    const testNFTAddress = "0x37914fAD5322Df6e701Be562BC9aff90F5fE928D";
     const TestNFT = await hre.ethers.getContractFactory("TestNFT");
     const testNFT = TestNFT.attach(testNFTAddress);
 
@@ -93,8 +93,8 @@ task("check-test-nft-balance", "Check TestNFT balance and owned tokens")
 
 task("test-tokens-info", "Get information about deployed test token contracts")
   .setAction(async (taskArgs, hre: HardhatRuntimeEnvironment) => {
-    const testTokenAddress = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9";
-    const testNFTAddress = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
+    const testTokenAddress = "0xD6e81e78930259e66a2f4b363D84a6Ec0BeCd2c6";
+    const testNFTAddress = "0x37914fAD5322Df6e701Be562BC9aff90F5fE928D";
 
     const TestToken = await hre.ethers.getContractFactory("TestToken");
     const TestNFT = await hre.ethers.getContractFactory("TestNFT");
