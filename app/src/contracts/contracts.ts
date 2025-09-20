@@ -1,5 +1,5 @@
-// 合约地址和ABI配置
-// 从 deployments/sepolia 生成的合约信息
+// Contract addresses and ABI configuration
+// Contract information generated from deployments/sepolia
 
 import InvisibleDropABI from './InvisibleDrop.abi.json';
 import ConfidentialCoin1ABI from './ConfidentialCoin1.abi.json';
@@ -7,7 +7,7 @@ import ConfidentialCoin2ABI from './ConfidentialCoin2.abi.json';
 import TestTokenABI from './TestToken.abi.json';
 import TestNFTABI from './TestNFT.abi.json';
 
-// Sepolia 合约地址
+// Sepolia contract addresses
 export const CONTRACT_ADDRESSES = {
   InvisibleDrop: '0x106F22a583E2e452BD3410851CBeA9DB025fB438',
   ConfidentialCoin1: '0x36De2Ed8465ad8976D2D2be399aeF29f612b3d9E',
@@ -16,7 +16,7 @@ export const CONTRACT_ADDRESSES = {
   TestNFT: '0x37914fAD5322Df6e701Be562BC9aff90F5fE928D',
 } as const;
 
-// 合约 ABI
+// Contract ABI
 export const CONTRACT_ABIS = {
   InvisibleDrop: InvisibleDropABI,
   ConfidentialCoin1: ConfidentialCoin1ABI,
@@ -25,10 +25,10 @@ export const CONTRACT_ABIS = {
   TestNFT: TestNFTABI,
 } as const;
 
-// Sepolia 网络配置
+// Sepolia network configuration
 export const SEPOLIA_CHAIN_ID = 11155111;
 export const SEPOLIA_RPC_URL = 'https://sepolia.infura.io/v3/c501d55ad9924cf5905ae1954ec6f7f3';
 
-// 类型定义
+// Type definitions
 export type ContractName = keyof typeof CONTRACT_ADDRESSES;
 export type ContractAddress = typeof CONTRACT_ADDRESSES[ContractName];

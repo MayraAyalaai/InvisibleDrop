@@ -1,9 +1,9 @@
-// FHE 解密服务
+// FHE Decryption Service
 import { getContractRead } from '../utils/contracts';
 import { CONTRACT_ADDRESSES } from '../contracts/contracts';
 
 export class FHEService {
-  // 解密 ConfidentialCoin 余额
+  // Decrypt ConfidentialCoin balance
   static async decryptBalance(
     tokenType: 'ConfidentialCoin1' | 'ConfidentialCoin2',
     userAddress: string,
@@ -14,27 +14,27 @@ export class FHEService {
       const contract = getContractRead(tokenType);
       const contractAddress = CONTRACT_ADDRESSES[tokenType];
 
-      // 获取加密余额句柄
+      // Get encrypted balance handle
       const encryptedBalance = await contract.confidentialBalanceOf(userAddress);
-      console.log('加密余额句柄:', encryptedBalance);
+      console.log('Encrypted balance handle:', encryptedBalance);
 
       if (!encryptedBalance || encryptedBalance === '0x0000000000000000000000000000000000000000000000000000000000000000') {
         return '0';
       }
 
-      // 生成密钥对
+      // Generate keypair
       const keypair = instance.generateKeypair();
 
-      // 准备解密请求
+      // Prepare decryption request
       const handleContractPairs = [{
         handle: encryptedBalance.toString(),
         contractAddress: contractAddress,
       }];
 
       const startTimeStamp = Math.floor(Date.now() / 1000).toString();
-      const durationDays = "1"; // 1天有效期
+      const durationDays = "1"; // 1 day validity
 
-      // 创建 EIP712 签名
+      // Create EIP712 signature
       const eip712 = instance.createEIP712(
         keypair.publicKey,
         [contractAddress],
@@ -42,7 +42,7 @@ export class FHEService {
         durationDays
       );
 
-      // 签名
+      // Sign
       const signature = await signer.signTypedData(
         eip712.domain,
         {
@@ -51,7 +51,7 @@ export class FHEService {
         eip712.message,
       );
 
-      // 执行用户解密
+      // Execute user decryption
       const result = await instance.userDecrypt(
         handleContractPairs,
         keypair.privateKey,
@@ -64,38 +64,38 @@ export class FHEService {
       );
 
       const decryptedValue = result[encryptedBalance.toString()];
-      console.log('解密结果:', decryptedValue);
+      console.log('Decryption result:', decryptedValue);
 
       return decryptedValue ? decryptedValue.toString() : '0';
 
     } catch (error: any) {
-      console.error(`解密 ${tokenType} 余额失败:`, error);
-      throw new Error('解密失败: ' + error.message);
+      console.error(`Failed to decrypt ${tokenType} balance:`, error);
+      throw new Error('Decryption failed: ' + error.message);
     }
   }
 
-  // 检查用户是否有权限解密
+  // Check if user has permission to decrypt
   static async canDecrypt(): Promise<boolean> {
     try {
-      // 检查用户是否有访问权限
-      // 这里需要调用合约的 ACL 检查方法
-      // 目前返回 true，表示所有用户都可以解密自己的余额
+      // Check if user has access permission
+      // Here we need to call the contract's ACL check method
+      // Currently returns true, indicating all users can decrypt their own balance
       return true;
 
     } catch (error) {
-      console.error(`检查解密权限失败:`, error);
+      console.error(`Failed to check decryption permission:`, error);
       return false;
     }
   }
 
-  // 获取加密余额句柄 (不解密)
+  // Get encrypted balance handle (without decryption)
   static async getEncryptedBalance(tokenType: 'ConfidentialCoin1' | 'ConfidentialCoin2', userAddress: string): Promise<string> {
     try {
       const contract = getContractRead(tokenType);
       const encryptedBalance = await contract.confidentialBalanceOf(userAddress);
       return encryptedBalance.toString();
     } catch (error) {
-      console.error(`获取加密余额失败:`, error);
+      console.error(`Failed to get encrypted balance:`, error);
       return '0x0';
     }
   }

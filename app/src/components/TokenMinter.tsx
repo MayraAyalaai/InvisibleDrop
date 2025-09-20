@@ -7,13 +7,13 @@ export function TokenMinter() {
   const { address } = useAccount();
   const [loading, setLoading] = useState<string | null>(null);
 
-  // 表单状态
+  // Form state
   const [testTokenAmount, setTestTokenAmount] = useState('1000');
   const [nftUri, setNftUri] = useState('https://example.com/token/');
   const [depositAmount, setDepositAmount] = useState('1000');
   const [selectedToken, setSelectedToken] = useState<'ConfidentialCoin1' | 'ConfidentialCoin2'>('ConfidentialCoin1');
 
-  // 铸造 TestToken
+  // Mint TestToken
   const handleMintTestToken = async () => {
     if (!address) return;
 
@@ -25,17 +25,17 @@ export function TokenMinter() {
         alert(result.message);
         setTestTokenAmount('1000');
       } else {
-        alert(`铸造失败: ${result.error}`);
+        alert(`Minting failed: ${result.error}`);
       }
     } catch (error) {
-      console.error('铸造 TestToken 失败:', error);
-      alert('铸造失败');
+      console.error('Failed to mint TestToken:', error);
+      alert('Minting failed');
     } finally {
       setLoading(null);
     }
   };
 
-  // 铸造 TestNFT
+  // Mint TestNFT
   const handleMintTestNFT = async () => {
     if (!address) return;
 
@@ -47,18 +47,18 @@ export function TokenMinter() {
         alert(result.message);
         setNftUri('https://example.com/token/');
       } else {
-        alert(`铸造失败: ${result.error}`);
+        alert(`Minting failed: ${result.error}`);
       }
     } catch (error) {
-      console.error('铸造 TestNFT 失败:', error);
-      alert('铸造失败');
+      console.error('Failed to mint TestNFT:', error);
+      alert('Minting failed');
     } finally {
       setLoading(null);
     }
   };
 
 
-  // 给空投合约充值
+  // Fund airdrop contract
   const handleDepositToAirdrop = async () => {
     try {
       setLoading('deposit');
@@ -68,11 +68,11 @@ export function TokenMinter() {
         alert(result.message);
         setDepositAmount('1000');
       } else {
-        alert(`充值失败: ${result.error}`);
+        alert(`Funding failed: ${result.error}`);
       }
     } catch (error) {
-      console.error('充值到空投合约失败:', error);
-      alert('充值失败');
+      console.error('Failed to fund airdrop contract:', error);
+      alert('Funding failed');
     } finally {
       setLoading(null);
     }
@@ -98,7 +98,7 @@ export function TokenMinter() {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '600px' }}>
 
-          {/* TestToken 铸造 */}
+          {/* TestToken minting */}
           <div style={{
             backgroundColor: 'white',
             padding: '24px',
@@ -148,7 +148,7 @@ export function TokenMinter() {
             </button>
           </div>
 
-          {/* TestNFT 铸造 */}
+          {/* TestNFT minting */}
           <div style={{
             backgroundColor: 'white',
             padding: '24px',
@@ -197,7 +197,7 @@ export function TokenMinter() {
             </button>
           </div>
 
-          {/* 空投合约充值 */}
+          {/* Airdrop contract funding */}
           <div style={{
             backgroundColor: 'white',
             padding: '24px',
@@ -278,7 +278,7 @@ export function TokenMinter() {
           </div>
         </div>
 
-        {/* 使用提示 */}
+        {/* Usage tips */}
         <div style={{
           padding: '16px',
           backgroundColor: '#eff6ff',

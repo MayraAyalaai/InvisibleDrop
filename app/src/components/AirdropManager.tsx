@@ -10,7 +10,7 @@ export function AirdropManager() {
   const [formData, setFormData] = useState<AirdropConfig>({
     rewardToken: CONTRACT_ADDRESSES.ConfidentialCoin1,
     rewardPerUser: 100,
-    endTime: Math.floor(Date.now() / 1000) + 86400 * 7, // 7天后
+    endTime: Math.floor(Date.now() / 1000) + 86400 * 7, // 7 days later
     requireNFT: false,
     nftContract: CONTRACT_ADDRESSES.TestNFT,
     requireToken: false,
@@ -18,11 +18,11 @@ export function AirdropManager() {
     minTokenAmount: '1000'
   });
 
-  // 处理表单提交
+  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!address) {
-      alert('请先连接钱包');
+      alert('Please connect your wallet first');
       return;
     }
 
@@ -32,23 +32,23 @@ export function AirdropManager() {
 
       if (result.success) {
         alert(result.message);
-        // 重置表单
+        // Reset form
         setFormData({
           ...formData,
           endTime: Math.floor(Date.now() / 1000) + 86400 * 7
         });
       } else {
-        alert(`创建失败: ${result.error}`);
+        alert(`Create failed: ${result.error}`);
       }
     } catch (error) {
-      console.error('创建空投失败:', error);
-      alert('创建空投失败');
+      console.error('Failed to create airdrop:', error);
+      alert('Failed to create airdrop');
     } finally {
       setLoading(false);
     }
   };
 
-  // 处理输入变化
+  // Handle input changes
   const handleInputChange = (field: keyof AirdropConfig, value: any) => {
     setFormData(prev => ({
       ...prev,
@@ -56,7 +56,7 @@ export function AirdropManager() {
     }));
   };
 
-  // 格式化日期时间输入值
+  // Format datetime input value
   const formatDateTimeLocal = (timestamp: number) => {
     const date = new Date(timestamp * 1000);
     const year = date.getFullYear();
@@ -67,7 +67,7 @@ export function AirdropManager() {
     return `${year}-${month}-${day}T${hours}:${minutes}`;
   };
 
-  // 处理日期时间变化
+  // Handle datetime changes
   const handleDateTimeChange = (value: string) => {
     const timestamp = Math.floor(new Date(value).getTime() / 1000);
     handleInputChange('endTime', timestamp);
@@ -76,30 +76,30 @@ export function AirdropManager() {
   if (!address) {
     return (
       <div style={{ textAlign: 'center', padding: '40px', color: '#6b7280' }}>
-        请先连接钱包
+        Please connect your wallet first
       </div>
     );
   }
 
   return (
     <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-      <h2 style={{ color: '#1f2937', marginBottom: '24px' }}>创建新空投</h2>
+      <h2 style={{ color: '#1f2937', marginBottom: '24px' }}>Create New Airdrop</h2>
 
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
 
-        {/* 基础信息 */}
+        {/* Basic information */}
         <div style={{
           backgroundColor: 'white',
           padding: '24px',
           border: '1px solid #e5e7eb',
           borderRadius: '12px'
         }}>
-          <h3 style={{ color: '#374151', margin: '0 0 16px 0' }}>基础信息</h3>
+          <h3 style={{ color: '#374151', margin: '0 0 16px 0' }}>Basic Information</h3>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div>
               <label style={{ display: 'block', marginBottom: '6px', color: '#374151', fontWeight: 'bold' }}>
-                奖励代币合约地址
+                Reward Token Contract Address
               </label>
               <select
                 value={formData.rewardToken}
@@ -123,7 +123,7 @@ export function AirdropManager() {
 
             <div>
               <label style={{ display: 'block', marginBottom: '6px', color: '#374151', fontWeight: 'bold' }}>
-                每用户奖励数量
+                Reward Amount per User
               </label>
               <input
                 type="number"
@@ -143,7 +143,7 @@ export function AirdropManager() {
 
             <div>
               <label style={{ display: 'block', marginBottom: '6px', color: '#374151', fontWeight: 'bold' }}>
-                结束时间
+                End Time
               </label>
               <input
                 type="datetime-local"
@@ -162,18 +162,18 @@ export function AirdropManager() {
           </div>
         </div>
 
-        {/* 条件设置 */}
+        {/* Condition settings */}
         <div style={{
           backgroundColor: 'white',
           padding: '24px',
           border: '1px solid #e5e7eb',
           borderRadius: '12px'
         }}>
-          <h3 style={{ color: '#374151', margin: '0 0 16px 0' }}>领取条件</h3>
+          <h3 style={{ color: '#374151', margin: '0 0 16px 0' }}>Claim Conditions</h3>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
-            {/* NFT 条件 */}
+            {/* NFT condition */}
             <div>
               <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
                 <input
@@ -182,7 +182,7 @@ export function AirdropManager() {
                   onChange={(e) => handleInputChange('requireNFT', e.target.checked)}
                   style={{ transform: 'scale(1.2)' }}
                 />
-                <span style={{ color: '#374151', fontWeight: 'bold' }}>需要持有 NFT</span>
+                <span style={{ color: '#374151', fontWeight: 'bold' }}>Require NFT Ownership</span>
               </label>
 
               {formData.requireNFT && (
@@ -204,7 +204,7 @@ export function AirdropManager() {
               )}
             </div>
 
-            {/* 代币条件 */}
+            {/* Token condition */}
             <div>
               <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
                 <input
@@ -213,7 +213,7 @@ export function AirdropManager() {
                   onChange={(e) => handleInputChange('requireToken', e.target.checked)}
                   style={{ transform: 'scale(1.2)' }}
                 />
-                <span style={{ color: '#374151', fontWeight: 'bold' }}>需要持有代币</span>
+                <span style={{ color: '#374151', fontWeight: 'bold' }}>Require Token Ownership</span>
               </label>
 
               {formData.requireToken && (
@@ -236,7 +236,7 @@ export function AirdropManager() {
 
                   <div>
                     <label style={{ display: 'block', marginBottom: '6px', color: '#6b7280', fontSize: '14px' }}>
-                      最小持有数量
+                      Minimum Holdings
                     </label>
                     <input
                       type="number"
@@ -260,7 +260,7 @@ export function AirdropManager() {
           </div>
         </div>
 
-        {/* 提交按钮 */}
+        {/* Submit button */}
         <button
           type="submit"
           disabled={loading}
@@ -275,11 +275,11 @@ export function AirdropManager() {
             cursor: loading ? 'not-allowed' : 'pointer'
           }}
         >
-          {loading ? '创建中...' : '🚀 创建空投'}
+          {loading ? 'Creating...' : '🚀 Create Airdrop'}
         </button>
       </form>
 
-      {/* 提示信息 */}
+      {/* Information tips */}
       <div style={{
         marginTop: '24px',
         padding: '16px',
@@ -288,12 +288,12 @@ export function AirdropManager() {
         borderRadius: '8px',
         color: '#92400e'
       }}>
-        <h4 style={{ margin: '0 0 8px 0' }}>⚠️ 注意事项</h4>
+        <h4 style={{ margin: '0 0 8px 0' }}>⚠️ Important Notes</h4>
         <ul style={{ margin: 0, paddingLeft: '20px' }}>
-          <li>创建空投后需要在"代币铸造"页面给空投合约充值奖励代币</li>
-          <li>确保奖励代币合约地址正确</li>
-          <li>条件设置后无法修改，请仔细检查</li>
-          <li>空投创建后立即生效，用户可以开始领取</li>
+          <li>After creating an airdrop, you need to fund the airdrop contract with reward tokens on the "Token Minting" page</li>
+          <li>Make sure the reward token contract address is correct</li>
+          <li>Conditions cannot be modified after setting, please check carefully</li>
+          <li>The airdrop will be effective immediately after creation, users can start claiming</li>
         </ul>
       </div>
     </div>

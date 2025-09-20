@@ -1,8 +1,8 @@
-// InvisibleDrop 合约服务
+// InvisibleDrop contract service
 import { ethers } from 'ethers';
 import { getContractRead, getContractWrite, formatError, waitForTransaction } from '../utils/contracts';
 
-// 空投配置接口
+// Airdrop configuration interface
 export interface AirdropConfig {
   rewardToken: string;
   rewardPerUser: number;
@@ -14,7 +14,7 @@ export interface AirdropConfig {
   minTokenAmount: string;
 }
 
-// 空投信息接口
+// Airdrop information interface
 export interface AirdropInfo {
   airdropper: string;
   rewardToken: string;
@@ -23,7 +23,7 @@ export interface AirdropInfo {
   endTime: number;
 }
 
-// 空投条件接口
+// Airdrop conditions interface
 export interface AirdropConditions {
   requireNFT: boolean;
   nftContract: string;
@@ -32,16 +32,16 @@ export interface AirdropConditions {
   minTokenAmount: string;
 }
 
-// 用户领取信息接口
+// User claim information interface
 export interface UserClaimInfo {
   hasClaimed: boolean;
   claimTime: number;
 }
 
-// InvisibleDrop 服务类
+// InvisibleDrop service class
 export class InvisibleDropService {
 
-  // 创建空投
+  // Create airdrop
   static async createAirdrop(config: AirdropConfig) {
     try {
       const contract = await getContractWrite('InvisibleDrop');
@@ -58,10 +58,10 @@ export class InvisibleDropService {
         ethers.parseEther(config.minTokenAmount)
       );
 
-      console.log('创建空投交易已提交:', tx.hash);
+      console.log('Airdrop creation transaction submitted:', tx.hash);
       const receipt = await waitForTransaction(tx.hash);
 
-      // 从事件中获取空投ID
+      // Get airdrop ID from event
       const airdropCreatedEvent = receipt.logs?.find((log: any) => {
         try {
           const parsed = contract.interface.parseLog(log);
@@ -81,7 +81,7 @@ export class InvisibleDropService {
         success: true,
         txHash: tx.hash,
         airdropId,
-        message: `空投创建成功！空投ID: ${airdropId}`
+        message: `Airdrop created successfully! Airdrop ID: ${airdropId}`
       };
     } catch (error) {
       return {
@@ -91,43 +91,43 @@ export class InvisibleDropService {
     }
   }
 
-  // 检查用户资格
+  // Check user eligibility
   static async checkEligibility(airdropId: number, userAddress: string): Promise<boolean> {
     try {
       const contract = getContractRead('InvisibleDrop');
       return await contract.checkEligibility(airdropId, userAddress);
     } catch (error) {
-      console.error('检查资格失败:', error);
+      console.error('Failed to check eligibility:', error);
       return false;
     }
   }
 
-  // 检查可领取数量
+  // Check claimable amount
   static async checkClaimableAmount(airdropId: number, userAddress: string): Promise<number> {
     try {
       const contract = getContractRead('InvisibleDrop');
       const amount = await contract.checkClaimableAmount(airdropId, userAddress);
       return Number(amount);
     } catch (error) {
-      console.error('检查可领取数量失败:', error);
+      console.error('Failed to check claimable amount:', error);
       return 0;
     }
   }
 
-  // 领取奖励
+  // Claim reward
   static async claimReward(airdropId: number) {
     try {
       const contract = await getContractWrite('InvisibleDrop');
 
       const tx = await contract.claimReward(airdropId);
-      console.log('领取奖励交易已提交:', tx.hash);
+      console.log('Reward claim transaction submitted:', tx.hash);
 
       await waitForTransaction(tx.hash);
 
       return {
         success: true,
         txHash: tx.hash,
-        message: '奖励领取成功！'
+        message: 'Reward claimed successfully!'
       };
     } catch (error) {
       return {
@@ -137,7 +137,7 @@ export class InvisibleDropService {
     }
   }
 
-  // 获取空投信息
+  // Get airdrop information
   static async getAirdropInfo(airdropId: number): Promise<AirdropInfo | null> {
     try {
       const contract = getContractRead('InvisibleDrop');
@@ -151,12 +151,12 @@ export class InvisibleDropService {
         endTime: Number(info[4])
       };
     } catch (error) {
-      console.error('获取空投信息失败:', error);
+      console.error('Failed to get airdrop info:', error);
       return null;
     }
   }
 
-  // 获取空投条件
+  // Get airdrop conditions
   static async getAirdropConditions(airdropId: number): Promise<AirdropConditions | null> {
     try {
       const contract = getContractRead('InvisibleDrop');
@@ -170,12 +170,12 @@ export class InvisibleDropService {
         minTokenAmount: ethers.formatEther(conditions[4])
       };
     } catch (error) {
-      console.error('获取空投条件失败:', error);
+      console.error('Failed to get airdrop conditions:', error);
       return null;
     }
   }
 
-  // 获取用户领取信息
+  // Get user claim information
   static async getUserClaimInfo(airdropId: number, userAddress: string): Promise<UserClaimInfo | null> {
     try {
       const contract = getContractRead('InvisibleDrop');
@@ -186,19 +186,19 @@ export class InvisibleDropService {
         claimTime: Number(claimInfo[1])
       };
     } catch (error) {
-      console.error('获取用户领取信息失败:', error);
+      console.error('Failed to get user claim info:', error);
       return null;
     }
   }
 
-  // 获取空投总数
+  // Get airdrop count
   static async getAirdropCount(): Promise<number> {
     try {
       const contract = getContractRead('InvisibleDrop');
       const count = await contract.airdropCount();
       return Number(count);
     } catch (error) {
-      console.error('获取空投总数失败:', error);
+      console.error('Failed to get airdrop count:', error);
       return 0;
     }
   }

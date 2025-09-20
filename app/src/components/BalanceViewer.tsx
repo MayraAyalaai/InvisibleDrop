@@ -27,7 +27,7 @@ export function BalanceViewer() {
   const [decryptingCoin1, setDecryptingCoin1] = useState(false);
   const [decryptingCoin2, setDecryptingCoin2] = useState(false);
 
-  // 加载公开代币余额
+  // Load public token balances
   const loadPublicBalances = async () => {
     if (!address) return;
 
@@ -45,12 +45,12 @@ export function BalanceViewer() {
         testNFTs
       });
     } catch (error) {
-      console.error('加载余额失败:', error);
+      console.error('Failed to load balances:', error);
     }
     setLoading(false);
   };
 
-  // 解密 ConfidentialCoin1 余额
+  // Decrypt ConfidentialCoin1 balance
   const decryptCoin1Balance = async () => {
     if (!address || !zamaInstance || !signer) {
       alert('Please wait for initialization to complete and connect wallet');
@@ -59,19 +59,19 @@ export function BalanceViewer() {
 
     setDecryptingCoin1(true);
     try {
-      // 调用 FHE 解密服务
+      // Call FHE decryption service
       const balance = await FHEService.decryptBalance('ConfidentialCoin1', address, zamaInstance,await signer);
       setConfidentialBalances(prev => ({ ...prev, coin1: balance }));
 
-      // alert(`ConfidentialCoin1 余额解密成功: ${balance}`);
+      // alert(`ConfidentialCoin1 balance decrypted successfully: ${balance}`);
     } catch (error: any) {
-      console.error('解密 ConfidentialCoin1 余额失败:', error);
+      console.error('Failed to decrypt ConfidentialCoin1 balance:', error);
       alert('Decryption failed, please try again: ' + error.message);
     }
     setDecryptingCoin1(false);
   };
 
-  // 解密 ConfidentialCoin2 余额
+  // Decrypt ConfidentialCoin2 balance
   const decryptCoin2Balance = async () => {
     if (!address || !zamaInstance || !signer) {
       alert('Please wait for initialization to complete and connect wallet');
@@ -80,19 +80,19 @@ export function BalanceViewer() {
 
     setDecryptingCoin2(true);
     try {
-      // 调用 FHE 解密服务
+      // Call FHE decryption service
       const balance = await FHEService.decryptBalance('ConfidentialCoin2', address, zamaInstance,await signer);
       setConfidentialBalances(prev => ({ ...prev, coin2: balance }));
 
-      // alert(`ConfidentialCoin2 余额解密成功: ${balance}`);
+      // alert(`ConfidentialCoin2 balance decrypted successfully: ${balance}`);
     } catch (error: any) {
-      console.error('解密 ConfidentialCoin2 余额失败:', error);
+      console.error('Failed to decrypt ConfidentialCoin2 balance:', error);
       alert('Decryption failed, please try again: ' + error.message);
     }
     setDecryptingCoin2(false);
   };
 
-  // 清除解密数据
+  // Clear decrypted data
   const clearDecryptedData = () => {
     setConfidentialBalances({ coin1: null, coin2: null });
   };
@@ -129,7 +129,7 @@ export function BalanceViewer() {
 
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-      {/* 页面标题 */}
+      {/* Page title */}
       <div style={{
         display: 'flex',
         justifyContent: 'space-between',
@@ -153,7 +153,7 @@ export function BalanceViewer() {
         </button>
       </div>
 
-      {/* 当前钱包地址 */}
+      {/* Current wallet address */}
       <div style={{
         backgroundColor: '#f9fafb',
         padding: '16px',
@@ -172,7 +172,7 @@ export function BalanceViewer() {
         </div>
       </div>
 
-      {/* 公开代币余额 */}
+      {/* Public token balance */}
       <div style={{
         backgroundColor: 'white',
         padding: '24px',
@@ -184,7 +184,7 @@ export function BalanceViewer() {
 
         {balances ? (
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-            {/* TestToken 余额 */}
+            {/* TestToken balance */}
             <div style={{
               padding: '16px',
               backgroundColor: '#f0fdf4',
@@ -197,7 +197,7 @@ export function BalanceViewer() {
               </p>
             </div>
 
-            {/* TestNFT 余额 */}
+            {/* TestNFT balance */}
             <div style={{
               padding: '16px',
               backgroundColor: '#faf5ff',
@@ -222,7 +222,7 @@ export function BalanceViewer() {
         )}
       </div>
 
-      {/* 加密代币余额 */}
+      {/* Encrypted token balance */}
       <div style={{
         backgroundColor: 'white',
         padding: '24px',
@@ -345,7 +345,7 @@ export function BalanceViewer() {
           </div>
         </div>
 
-        {/* 解密说明 */}
+        {/* Decryption instructions */}
         <div style={{
           marginTop: '16px',
           padding: '12px',
@@ -365,7 +365,7 @@ export function BalanceViewer() {
         </div>
       </div>
 
-      {/* 合约地址信息 */}
+      {/* Contract address information */}
       <div style={{
         backgroundColor: '#f9fafb',
         padding: '20px',

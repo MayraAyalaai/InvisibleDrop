@@ -1,25 +1,25 @@
-// 代币合约服务
+// Token contract service
 import { ethers } from 'ethers';
 import { getContractRead, getContractWrite, formatError, waitForTransaction } from '../utils/contracts';
 import { CONTRACT_ADDRESSES } from '../contracts/contracts';
 
-// 代币服务类
+// Token service class
 export class TokenService {
 
-  // 铸造 TestToken
+  // Mint TestToken
   static async mintTestToken(to: string, amount: string) {
     try {
       const contract = await getContractWrite('TestToken');
 
       const tx = await contract.mint(to, ethers.parseEther(amount));
-      console.log('铸造 TestToken 交易已提交:', tx.hash);
+      console.log('TestToken minting transaction submitted:', tx.hash);
 
       await waitForTransaction(tx.hash);
 
       return {
         success: true,
         txHash: tx.hash,
-        message: `成功铸造 ${amount} TestToken`
+        message: `Successfully minted ${amount} TestToken`
       };
     } catch (error) {
       return {
@@ -29,17 +29,17 @@ export class TokenService {
     }
   }
 
-  // 铸造 TestNFT
+  // Mint TestNFT
   static async mintTestNFT(to: string, uri: string) {
     try {
       const contract = await getContractWrite('TestNFT');
 
       const tx = await contract.mint(to, uri);
-      console.log('铸造 TestNFT 交易已提交:', tx.hash);
+      console.log('TestNFT minting transaction submitted:', tx.hash);
 
       const receipt = await waitForTransaction(tx.hash);
 
-      // 从事件中获取 Token ID
+      // Get Token ID from event
       const transferEvent = receipt.logs?.find((log: any) => {
         try {
           const parsed = contract.interface.parseLog(log);
@@ -59,7 +59,7 @@ export class TokenService {
         success: true,
         txHash: tx.hash,
         tokenId,
-        message: `成功铸造 TestNFT #${tokenId}`
+        message: `Successfully minted TestNFT #${tokenId}`
       };
     } catch (error) {
       return {
@@ -69,20 +69,20 @@ export class TokenService {
     }
   }
 
-  // 铸造 ConfidentialCoin1
+  // Mint ConfidentialCoin1
   static async mintConfidentialCoin1(to: string, amount: number) {
     try {
       const contract = await getContractWrite('ConfidentialCoin1');
 
       const tx = await contract.mint(to, amount);
-      console.log('铸造 ConfidentialCoin1 交易已提交:', tx.hash);
+      console.log('ConfidentialCoin1 minting transaction submitted:', tx.hash);
 
       await waitForTransaction(tx.hash);
 
       return {
         success: true,
         txHash: tx.hash,
-        message: `成功铸造 ${amount} ConfidentialCoin1`
+        message: `Successfully minted ${amount} ConfidentialCoin1`
       };
     } catch (error) {
       return {
@@ -92,20 +92,20 @@ export class TokenService {
     }
   }
 
-  // 铸造 ConfidentialCoin2
+  // Mint ConfidentialCoin2
   static async mintConfidentialCoin2(to: string, amount: number) {
     try {
       const contract = await getContractWrite('ConfidentialCoin2');
 
       const tx = await contract.mint(to, amount);
-      console.log('铸造 ConfidentialCoin2 交易已提交:', tx.hash);
+      console.log('ConfidentialCoin2 minting transaction submitted:', tx.hash);
 
       await waitForTransaction(tx.hash);
 
       return {
         success: true,
         txHash: tx.hash,
-        message: `成功铸造 ${amount} ConfidentialCoin2`
+        message: `Successfully minted ${amount} ConfidentialCoin2`
       };
     } catch (error) {
       return {
@@ -115,31 +115,31 @@ export class TokenService {
     }
   }
 
-  // 获取 TestToken 余额
+  // Get TestToken balance
   static async getTestTokenBalance(address: string): Promise<string> {
     try {
       const contract = getContractRead('TestToken');
       const balance = await contract.balanceOf(address);
       return ethers.formatEther(balance);
     } catch (error) {
-      console.error('获取 TestToken 余额失败:', error);
+      console.error('Failed to get TestToken balance:', error);
       return '0';
     }
   }
 
-  // 获取 TestNFT 余额
+  // Get TestNFT balance
   static async getTestNFTBalance(address: string): Promise<number> {
     try {
       const contract = getContractRead('TestNFT');
       const balance = await contract.balanceOf(address);
       return Number(balance);
     } catch (error) {
-      console.error('获取 TestNFT 余额失败:', error);
+      console.error('Failed to get TestNFT balance:', error);
       return 0;
     }
   }
 
-  // 获取用户拥有的 TestNFT 列表
+  // Get user's TestNFT list
   static async getUserTestNFTs(address: string): Promise<Array<{tokenId: string, uri: string}>> {
     try {
       const contract = getContractRead('TestNFT');
@@ -157,12 +157,12 @@ export class TokenService {
 
       return nfts;
     } catch (error) {
-      console.error('获取用户 TestNFT 列表失败:', error);
+      console.error('Failed to get user TestNFT list:', error);
       return [];
     }
   }
 
-  // 获取 TestToken 信息
+  // Get TestToken information
   static async getTestTokenInfo() {
     try {
       const contract = getContractRead('TestToken');
@@ -178,12 +178,12 @@ export class TokenService {
         totalSupply: ethers.formatEther(totalSupply)
       };
     } catch (error) {
-      console.error('获取 TestToken 信息失败:', error);
+      console.error('Failed to get TestToken info:', error);
       return null;
     }
   }
 
-  // 获取 TestNFT 信息
+  // Get TestNFT information
   static async getTestNFTInfo() {
     try {
       const contract = getContractRead('TestNFT');
@@ -197,12 +197,12 @@ export class TokenService {
         symbol
       };
     } catch (error) {
-      console.error('获取 TestNFT 信息失败:', error);
+      console.error('Failed to get TestNFT info:', error);
       return null;
     }
   }
 
-  // 获取 ConfidentialCoin 信息
+  // Get ConfidentialCoin information
   static async getConfidentialCoinInfo(coinNumber: 1 | 2) {
     try {
       const contractName = coinNumber === 1 ? 'ConfidentialCoin1' : 'ConfidentialCoin2';
@@ -218,12 +218,12 @@ export class TokenService {
         symbol
       };
     } catch (error) {
-      console.error(`获取 ConfidentialCoin${coinNumber} 信息失败:`, error);
+      console.error(`Failed to get ConfidentialCoin${coinNumber} info:`, error);
       return null;
     }
   }
 
-  // 给空投合约充值 - 直接mint到空投合约地址
+  // Fund airdrop contract - mint directly to airdrop contract address
   static async depositToAirdrop(tokenType: 'ConfidentialCoin1' | 'ConfidentialCoin2', amount: string) {
     const airdropAddress = CONTRACT_ADDRESSES.InvisibleDrop;
 
@@ -234,14 +234,14 @@ export class TokenService {
           const amountInWei = parseInt(amount)*1000000;
 
           const tx = await contract.mint(airdropAddress, amountInWei);
-          console.log('向空投合约充值 ConfidentialCoin1 交易已提交:', tx.hash);
+          console.log('ConfidentialCoin1 funding to airdrop contract submitted:', tx.hash);
 
           await waitForTransaction(tx.hash);
 
           return {
             success: true,
             txHash: tx.hash,
-            message: `成功向空投合约充值 ${amount} ConfidentialCoin1`
+            message: `Successfully funded airdrop contract with ${amount} ConfidentialCoin1`
           };
         } catch (error) {
           return {
@@ -256,14 +256,14 @@ export class TokenService {
           const amountInWei = parseInt(amount)*1000000;
 
           const tx = await contract.mint(airdropAddress, amountInWei);
-          console.log('向空投合约充值 ConfidentialCoin2 交易已提交:', tx.hash);
+          console.log('ConfidentialCoin2 funding to airdrop contract submitted:', tx.hash);
 
           await waitForTransaction(tx.hash);
 
           return {
             success: true,
             txHash: tx.hash,
-            message: `成功向空投合约充值 ${amount} ConfidentialCoin2`
+            message: `Successfully funded airdrop contract with ${amount} ConfidentialCoin2`
           };
         } catch (error) {
           return {
@@ -275,7 +275,7 @@ export class TokenService {
       default:
         return {
           success: false,
-          error: '不支持的代币类型'
+          error: 'Unsupported token type'
         };
     }
   }

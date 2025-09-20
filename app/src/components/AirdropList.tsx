@@ -18,7 +18,7 @@ export function AirdropList() {
   const [loading, setLoading] = useState(true);
   const [claimingAirdropId, setClaimingAirdropId] = useState<number | null>(null);
 
-  // 加载空投列表
+  // Load airdrop list
   const loadAirdrops = async () => {
     if (!address) return;
 
@@ -34,13 +34,13 @@ export function AirdropList() {
       const airdropData = await Promise.all(airdropPromises);
       setAirdrops(airdropData.filter(Boolean) as AirdropData[]);
     } catch (error) {
-      console.error('加载空投列表失败:', error);
+      console.error('Failed to load airdrop list:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  // 加载单个空投信息
+  // Load single airdrop information
   const loadSingleAirdrop = async (airdropId: number): Promise<AirdropData | null> => {
     if (!address) return null;
 
@@ -67,12 +67,12 @@ export function AirdropList() {
         canClaim
       };
     } catch (error) {
-      console.error(`加载空投 ${airdropId} 失败:`, error);
+      console.error(`Failed to load airdrop ${airdropId}:`, error);
       return null;
     }
   };
 
-  // 领取奖励
+  // Claim reward
   const handleClaim = async (airdropId: number) => {
     try {
       setClaimingAirdropId(airdropId);
@@ -80,25 +80,25 @@ export function AirdropList() {
 
       if (result.success) {
         alert(result.message);
-        // 重新加载空投列表
+        // Reload airdrop list
         await loadAirdrops();
       } else {
-        alert(`领取失败: ${result.error}`);
+        alert(`Claim failed: ${result.error}`);
       }
     } catch (error) {
-      console.error('领取失败:', error);
-      alert('领取失败');
+      console.error('Claim failed:', error);
+      alert('Claim failed');
     } finally {
       setClaimingAirdropId(null);
     }
   };
 
-  // 格式化时间
+  // Format time
   const formatTime = (timestamp: number) => {
     return new Date(timestamp * 1000).toLocaleString('zh-CN');
   };
 
-  // 格式化地址
+  // Format address
   const formatAddress = (address: string) => {
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
   };
@@ -112,7 +112,7 @@ export function AirdropList() {
   if (!address) {
     return (
       <div style={{ textAlign: 'center', padding: '40px', color: '#6b7280' }}>
-        请先连接钱包
+        Please connect your wallet first
       </div>
     );
   }
@@ -120,7 +120,7 @@ export function AirdropList() {
   if (loading) {
     return (
       <div style={{ textAlign: 'center', padding: '40px', color: '#6b7280' }}>
-        加载中...
+        Loading...
       </div>
     );
   }
@@ -128,8 +128,8 @@ export function AirdropList() {
   if (airdrops.length === 0) {
     return (
       <div style={{ textAlign: 'center', padding: '40px', color: '#6b7280' }}>
-        <h3>暂无空投</h3>
-        <p>目前还没有任何空投活动</p>
+        <h3>No Airdrops</h3>
+        <p>There are currently no airdrop activities</p>
       </div>
     );
   }
@@ -142,7 +142,7 @@ export function AirdropList() {
         alignItems: 'center',
         marginBottom: '20px'
       }}>
-        <h2 style={{ color: '#1f2937', margin: 0 }}>空投列表</h2>
+        <h2 style={{ color: '#1f2937', margin: 0 }}>Airdrop List</h2>
         <button
           onClick={loadAirdrops}
           style={{
@@ -154,7 +154,7 @@ export function AirdropList() {
             fontSize: '14px'
           }}
         >
-          🔄 刷新
+          🔄 Refresh
         </button>
       </div>
 
@@ -173,7 +173,7 @@ export function AirdropList() {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div style={{ flex: 1 }}>
                 <h3 style={{ color: '#1f2937', margin: '0 0 12px 0' }}>
-                  空投 #{airdrop.id}
+                  Airdrop #{airdrop.id}
                   {airdrop.isActive ? (
                     <span style={{
                       backgroundColor: '#10b981',
@@ -183,7 +183,7 @@ export function AirdropList() {
                       fontSize: '12px',
                       marginLeft: '8px'
                     }}>
-                      进行中
+                      Active
                     </span>
                   ) : (
                     <span style={{
@@ -194,7 +194,7 @@ export function AirdropList() {
                       fontSize: '12px',
                       marginLeft: '8px'
                     }}>
-                      已结束
+                      Ended
                     </span>
                   )}
                 </h3>
@@ -202,34 +202,34 @@ export function AirdropList() {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
                   <div>
                     <p style={{ margin: '4px 0', color: '#374151' }}>
-                      <strong>发起者:</strong> {formatAddress(airdrop.airdropper)}
+                      <strong>Creator:</strong> {formatAddress(airdrop.airdropper)}
                     </p>
                     <p style={{ margin: '4px 0', color: '#374151' }}>
-                      <strong>奖励代币:</strong> {formatAddress(airdrop.rewardToken)}
+                      <strong>Reward Token:</strong> {formatAddress(airdrop.rewardToken)}
                     </p>
                     <p style={{ margin: '4px 0', color: '#374151' }}>
-                      <strong>每人奖励:</strong> {airdrop.rewardPerUser} 代币
+                      <strong>Reward per User:</strong> {airdrop.rewardPerUser} tokens
                     </p>
                   </div>
                   <div>
                     <p style={{ margin: '4px 0', color: '#374151' }}>
-                      <strong>结束时间:</strong> {formatTime(airdrop.endTime)}
+                      <strong>End Time:</strong> {formatTime(airdrop.endTime)}
                     </p>
                     <p style={{ margin: '4px 0', color: '#374151' }}>
-                      <strong>用户状态:</strong>
+                      <strong>User Status:</strong>
                       {airdrop.isEligible ? (
-                        <span style={{ color: '#10b981' }}> ✅ 符合条件</span>
+                        <span style={{ color: '#10b981' }}> ✅ Eligible</span>
                       ) : (
-                        <span style={{ color: '#ef4444' }}> ❌ 不符合条件</span>
+                        <span style={{ color: '#ef4444' }}> ❌ Not Eligible</span>
                       )}
                     </p>
                     <p style={{ margin: '4px 0', color: '#374151' }}>
-                      <strong>可领取:</strong> {airdrop.claimableAmount} 代币
+                      <strong>Claimable:</strong> {airdrop.claimableAmount} tokens
                     </p>
                   </div>
                 </div>
 
-                {/* 条件信息 */}
+                {/* Condition information */}
                 {airdrop.conditions && (
                   <div style={{
                     backgroundColor: '#f9fafb',
@@ -237,26 +237,26 @@ export function AirdropList() {
                     borderRadius: '6px',
                     marginBottom: '16px'
                   }}>
-                    <h4 style={{ margin: '0 0 8px 0', color: '#374151' }}>领取条件:</h4>
+                    <h4 style={{ margin: '0 0 8px 0', color: '#374151' }}>Claim Conditions:</h4>
                     {airdrop.conditions.requireNFT && (
                       <p style={{ margin: '4px 0', fontSize: '14px', color: '#6b7280' }}>
-                        🎨 需要持有 NFT: {formatAddress(airdrop.conditions.nftContract)}
+                        🎨 Need to hold NFT: {formatAddress(airdrop.conditions.nftContract)}
                       </p>
                     )}
                     {airdrop.conditions.requireToken && (
                       <p style={{ margin: '4px 0', fontSize: '14px', color: '#6b7280' }}>
-                        🪙 需要持有代币: {formatAddress(airdrop.conditions.tokenContract)} ≥ {airdrop.conditions.minTokenAmount}
+                        🪙 Need to hold tokens: {formatAddress(airdrop.conditions.tokenContract)} ≥ {airdrop.conditions.minTokenAmount}
                       </p>
                     )}
                     {!airdrop.conditions.requireNFT && !airdrop.conditions.requireToken && (
                       <p style={{ margin: '4px 0', fontSize: '14px', color: '#6b7280' }}>
-                        🎉 无条件限制
+                        🎉 No conditions required
                       </p>
                     )}
                   </div>
                 )}
 
-                {/* 用户领取状态 */}
+                {/* User claim status */}
                 {airdrop.userClaimInfo && airdrop.userClaimInfo.hasClaimed && (
                   <div style={{
                     backgroundColor: '#ecfdf5',
@@ -266,13 +266,13 @@ export function AirdropList() {
                     marginBottom: '16px'
                   }}>
                     <p style={{ margin: 0, color: '#065f46' }}>
-                      ✅ 已于 {formatTime(airdrop.userClaimInfo.claimTime)} 领取
+                      ✅ Claimed at {formatTime(airdrop.userClaimInfo.claimTime)}
                     </p>
                   </div>
                 )}
               </div>
 
-              {/* 领取按钮 */}
+              {/* Claim button */}
               <div style={{ marginLeft: '20px' }}>
                 {airdrop.canClaim ? (
                   <button
@@ -289,7 +289,7 @@ export function AirdropList() {
                       minWidth: '100px'
                     }}
                   >
-                    {claimingAirdropId === airdrop.id ? '领取中...' : '🎁 领取'}
+                    {claimingAirdropId === airdrop.id ? 'Claiming...' : '🎁 Claim'}
                   </button>
                 ) : (
                   <div style={{
@@ -302,9 +302,9 @@ export function AirdropList() {
                     textAlign: 'center',
                     minWidth: '100px'
                   }}>
-                    {airdrop.userClaimInfo?.hasClaimed ? '已领取' :
-                     !airdrop.isEligible ? '不符合条件' :
-                     !airdrop.isActive ? '已结束' : '暂不可领取'}
+                    {airdrop.userClaimInfo?.hasClaimed ? 'Claimed' :
+                     !airdrop.isEligible ? 'Not Eligible' :
+                     !airdrop.isActive ? 'Ended' : 'Not Available'}
                   </div>
                 )}
               </div>
