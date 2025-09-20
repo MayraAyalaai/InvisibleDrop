@@ -53,7 +53,7 @@ export function BalanceViewer() {
   // 解密 ConfidentialCoin1 余额
   const decryptCoin1Balance = async () => {
     if (!address || !zamaInstance || !signer) {
-      alert('请等待初始化完成并连接钱包');
+      alert('Please wait for initialization to complete and connect wallet');
       return;
     }
 
@@ -66,7 +66,7 @@ export function BalanceViewer() {
       // alert(`ConfidentialCoin1 余额解密成功: ${balance}`);
     } catch (error) {
       console.error('解密 ConfidentialCoin1 余额失败:', error);
-      alert('解密失败，请重试: ' + error.message);
+      alert('Decryption failed, please try again: ' + error.message);
     }
     setDecryptingCoin1(false);
   };
@@ -74,7 +74,7 @@ export function BalanceViewer() {
   // 解密 ConfidentialCoin2 余额
   const decryptCoin2Balance = async () => {
     if (!address || !zamaInstance || !signer) {
-      alert('请等待初始化完成并连接钱包');
+      alert('Please wait for initialization to complete and connect wallet');
       return;
     }
 
@@ -87,7 +87,7 @@ export function BalanceViewer() {
       // alert(`ConfidentialCoin2 余额解密成功: ${balance}`);
     } catch (error) {
       console.error('解密 ConfidentialCoin2 余额失败:', error);
-      alert('解密失败，请重试: ' + error.message);
+      alert('Decryption failed, please try again: ' + error.message);
     }
     setDecryptingCoin2(false);
   };
@@ -106,7 +106,7 @@ export function BalanceViewer() {
   if (!address) {
     return (
       <div style={{ textAlign: 'center', padding: '40px', color: '#6b7280' }}>
-        请先连接钱包查看余额
+        Please connect your wallet to view balance
       </div>
     );
   }
@@ -114,7 +114,7 @@ export function BalanceViewer() {
   if (zamaLoading) {
     return (
       <div style={{ textAlign: 'center', padding: '40px', color: '#6b7280' }}>
-        初始化加密服务中...
+        Initializing encryption service...
       </div>
     );
   }
@@ -122,7 +122,7 @@ export function BalanceViewer() {
   if (zamaError) {
     return (
       <div style={{ textAlign: 'center', padding: '40px', color: '#dc2626' }}>
-        加密服务初始化失败: {zamaError}
+        Encryption service initialization failed: {zamaError}
       </div>
     );
   }
@@ -136,7 +136,7 @@ export function BalanceViewer() {
         alignItems: 'center',
         marginBottom: '24px'
       }}>
-        <h2 style={{ color: '#1f2937', margin: 0 }}>我的钱包余额</h2>
+        <h2 style={{ color: '#1f2937', margin: 0 }}>My Wallet Balance</h2>
         <button
           onClick={loadPublicBalances}
           disabled={loading}
@@ -149,7 +149,7 @@ export function BalanceViewer() {
             fontSize: '14px'
           }}
         >
-          {loading ? '🔄 刷新中...' : '🔄 刷新余额'}
+          {loading ? '🔄 Refreshing...' : '🔄 Refresh Balance'}
         </button>
       </div>
 
@@ -161,7 +161,7 @@ export function BalanceViewer() {
         borderRadius: '8px',
         marginBottom: '24px'
       }}>
-        <h4 style={{ margin: '0 0 8px 0', color: '#374151' }}>钱包地址</h4>
+        <h4 style={{ margin: '0 0 8px 0', color: '#374151' }}>Wallet Address</h4>
         <div style={{
           fontFamily: 'monospace',
           fontSize: '14px',
@@ -180,7 +180,7 @@ export function BalanceViewer() {
         borderRadius: '12px',
         marginBottom: '24px'
       }}>
-        <h3 style={{ color: '#374151', margin: '0 0 20px 0' }}>💰 公开代币余额</h3>
+        <h3 style={{ color: '#374151', margin: '0 0 20px 0' }}>💰 Public Token Balance</h3>
 
         {balances ? (
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
@@ -217,7 +217,7 @@ export function BalanceViewer() {
           </div>
         ) : (
           <div style={{ textAlign: 'center', color: '#6b7280', padding: '20px' }}>
-            {loading ? '加载中...' : '暂无数据'}
+            {loading ? 'Loading...' : 'No data'}
           </div>
         )}
       </div>
@@ -236,7 +236,7 @@ export function BalanceViewer() {
           alignItems: 'center',
           marginBottom: '20px'
         }}>
-          <h3 style={{ color: '#374151', margin: 0 }}>🔐 加密代币余额</h3>
+          <h3 style={{ color: '#374151', margin: 0 }}>🔐 Encrypted Token Balance</h3>
           {(confidentialBalances.coin1 || confidentialBalances.coin2) && (
             <button
               onClick={clearDecryptedData}
@@ -250,7 +250,7 @@ export function BalanceViewer() {
                 fontSize: '12px'
               }}
             >
-              清除解密数据
+              Clear Decrypted Data
             </button>
           )}
         </div>
@@ -271,13 +271,13 @@ export function BalanceViewer() {
                   {Number(confidentialBalances.coin1).toLocaleString()} CC1
                 </p>
                 <div style={{ fontSize: '12px', color: '#92400e' }}>
-                  ✅ 已解密显示
+                  ✅ Decrypted and Displayed
                 </div>
               </div>
             ) : (
               <div>
                 <p style={{ color: '#92400e', margin: '0 0 12px 0', fontSize: '16px' }}>
-                  余额已加密 🔒
+                  Balance Encrypted 🔒
                 </p>
                 <button
                   onClick={decryptCoin1Balance}
@@ -294,7 +294,7 @@ export function BalanceViewer() {
                     fontWeight: 'bold'
                   }}
                 >
-                  {decryptingCoin1 ? '解密中...' : '🔓 点击解密'}
+                  {decryptingCoin1 ? 'Decrypting...' : '🔓 Click to Decrypt'}
                 </button>
               </div>
             )}
@@ -315,13 +315,13 @@ export function BalanceViewer() {
                   {Number(confidentialBalances.coin2).toLocaleString()} CC2
                 </p>
                 <div style={{ fontSize: '12px', color: '#dc2626' }}>
-                  ✅ 已解密显示
+                  ✅ Decrypted and Displayed
                 </div>
               </div>
             ) : (
               <div>
                 <p style={{ color: '#dc2626', margin: '0 0 12px 0', fontSize: '16px' }}>
-                  余额已加密 🔒
+                  Balance Encrypted 🔒
                 </p>
                 <button
                   onClick={decryptCoin2Balance}
@@ -338,7 +338,7 @@ export function BalanceViewer() {
                     fontWeight: 'bold'
                   }}
                 >
-                  {decryptingCoin2 ? '解密中...' : '🔓 点击解密'}
+                  {decryptingCoin2 ? 'Decrypting...' : '🔓 Click to Decrypt'}
                 </button>
               </div>
             )}
@@ -355,12 +355,12 @@ export function BalanceViewer() {
           fontSize: '14px',
           color: '#1e40af'
         }}>
-          <strong>🔒 关于加密代币:</strong>
+          <strong>🔒 About Encrypted Tokens:</strong>
           <ul style={{ margin: '8px 0 0 0', paddingLeft: '20px' }}>
-            <li>基于 Zama FHE 技术，余额完全加密存储</li>
-            <li>只有钱包所有者可以解密查看真实余额</li>
-            <li>解密过程在本地进行，保护隐私安全</li>
-            <li>解密数据仅在当前会话有效</li>
+            <li>Based on Zama FHE technology, balances are fully encrypted storage</li>
+            <li>Only wallet owners can decrypt and view real balances</li>
+            <li>Decryption process is performed locally to protect privacy</li>
+            <li>Decrypted data is only valid for current session</li>
           </ul>
         </div>
       </div>
@@ -372,7 +372,7 @@ export function BalanceViewer() {
         border: '1px solid #e5e7eb',
         borderRadius: '8px'
       }}>
-        <h4 style={{ color: '#374151', margin: '0 0 12px 0' }}>📋 合约地址</h4>
+        <h4 style={{ color: '#374151', margin: '0 0 12px 0' }}>📋 Contract Addresses</h4>
         <div style={{ fontSize: '12px', color: '#6b7280', lineHeight: '1.6' }}>
           <div><strong>ConfidentialCoin1:</strong> <span style={{ fontFamily: 'monospace' }}>{CONTRACT_ADDRESSES.ConfidentialCoin1}</span></div>
           <div><strong>ConfidentialCoin2:</strong> <span style={{ fontFamily: 'monospace' }}>{CONTRACT_ADDRESSES.ConfidentialCoin2}</span></div>

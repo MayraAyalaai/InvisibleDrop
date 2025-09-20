@@ -34,7 +34,7 @@ export function InvisibleDropApp() {
             color: '#6b7280',
             margin: '5px 0 0 0'
           }}>
-            隐私空投平台 - 基于 Zama FHE 技术
+            Privacy Airdrop Platform - Powered by Zama FHE
           </p>
         </div>
         <ConnectButton />
@@ -49,10 +49,10 @@ export function InvisibleDropApp() {
           border: '1px solid #e5e7eb'
         }}>
           <h2 style={{ color: '#374151', marginBottom: '16px' }}>
-            欢迎使用 InvisibleDrop
+            Welcome to InvisibleDrop
           </h2>
           <p style={{ color: '#6b7280', marginBottom: '24px' }}>
-            请连接钱包开始使用隐私空投功能
+            Please connect your wallet to start using privacy airdrop features
           </p>
           <ConnectButton />
         </div>
@@ -66,10 +66,10 @@ export function InvisibleDropApp() {
             borderBottom: '1px solid #e5e7eb'
           }}>
             {[
-              { key: 'airdrops', label: '🎯 空投列表' },
-              { key: 'create', label: '➕ 创建空投' },
-              { key: 'mint', label: '🪙 铸造代币' },
-              { key: 'balance', label: '💰 我的余额' }
+              { key: 'airdrops', label: '🎯 Airdrop List' },
+              { key: 'create', label: '➕ Create Airdrop' },
+              { key: 'mint', label: '🪙 Mint Tokens' },
+              { key: 'balance', label: '💰 My Balance' }
             ].map(({ key, label }) => (
               <button
                 key={key}
@@ -121,18 +121,18 @@ export function InvisibleDropApp() {
         fontSize: '14px'
       }}>
         <p>
-          InvisibleDrop - 基于 Zama FHE 的隐私空投平台 |
+          InvisibleDrop - Privacy Airdrop Platform Based on Zama FHE |
           <a
             href="https://docs.zama.ai"
             target="_blank"
             rel="noopener noreferrer"
             style={{ color: '#3b82f6', marginLeft: '8px' }}
           >
-            了解 Zama
+            Learn about Zama
           </a>
         </p>
         <p style={{ marginTop: '8px' }}>
-          Sepolia 测试网 | 合约地址: 0xCb96848DD60c987e67D406A3da966F63270dbA7b
+          Sepolia Testnet | Contract Address: 0xCb96848DD60c987e67D406A3da966F63270dbA7b
         </p>
       </footer>
     </div>

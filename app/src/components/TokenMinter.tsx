@@ -127,7 +127,7 @@ export function TokenMinter() {
   if (!address) {
     return (
       <div style={{ textAlign: 'center', padding: '40px', color: '#6b7280' }}>
-        请先连接钱包
+        Please connect your wallet first
       </div>
     );
   }
@@ -135,9 +135,9 @@ export function TokenMinter() {
   return (
     <div>
       <div style={{ marginBottom: '24px' }}>
-        <h2 style={{ color: '#1f2937', margin: 0 }}>代币铸造</h2>
+        <h2 style={{ color: '#1f2937', margin: 0 }}>Token Minting</h2>
         <p style={{ color: '#6b7280', margin: '8px 0 0 0', fontSize: '14px' }}>
-          铸造测试代币和给空投合约充值奖励代币
+          Mint test tokens and fund airdrop contracts with reward tokens
         </p>
       </div>
 
@@ -152,12 +152,12 @@ export function TokenMinter() {
           }}>
             <h3 style={{ color: '#374151', margin: '0 0 16px 0' }}>🪙 TestToken</h3>
             <p style={{ color: '#6b7280', margin: '0 0 16px 0', fontSize: '14px' }}>
-              用于测试的 ERC20 代币，可作为空投条件
+              ERC20 token for testing, can be used as airdrop conditions
             </p>
 
             <div style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', marginBottom: '6px', color: '#374151', fontWeight: 'bold' }}>
-                铸造数量
+                Mint Amount
               </label>
               <input
                 type="number"
@@ -189,7 +189,7 @@ export function TokenMinter() {
                 fontWeight: 'bold'
               }}
             >
-              {loading === 'testToken' ? '铸造中...' : '铸造 TestToken'}
+              {loading === 'testToken' ? 'Minting...' : 'Mint TestToken'}
             </button>
           </div>
 
@@ -202,7 +202,7 @@ export function TokenMinter() {
           }}>
             <h3 style={{ color: '#374151', margin: '0 0 16px 0' }}>🎨 TestNFT</h3>
             <p style={{ color: '#6b7280', margin: '0 0 16px 0', fontSize: '14px' }}>
-              用于测试的 ERC721 NFT，可作为空投条件
+              ERC721 NFT for testing, can be used as airdrop conditions
             </p>
 
             <div style={{ marginBottom: '16px' }}>
@@ -238,7 +238,7 @@ export function TokenMinter() {
                 fontWeight: 'bold'
               }}
             >
-              {loading === 'testNFT' ? '铸造中...' : '铸造 TestNFT'}
+              {loading === 'testNFT' ? 'Minting...' : 'Mint TestNFT'}
             </button>
           </div>
 
@@ -249,15 +249,15 @@ export function TokenMinter() {
             border: '1px solid #e5e7eb',
             borderRadius: '12px'
           }}>
-            <h3 style={{ color: '#374151', margin: '0 0 16px 0' }}>🎁 空投合约充值</h3>
+            <h3 style={{ color: '#374151', margin: '0 0 16px 0' }}>🎁 Airdrop Contract Funding</h3>
             <p style={{ color: '#6b7280', margin: '0 0 16px 0', fontSize: '14px' }}>
-              直接向空投合约mint代币，用于空投奖励分发
+              Mint tokens directly to airdrop contract for reward distribution
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <div>
                 <label style={{ display: 'block', marginBottom: '6px', color: '#374151', fontWeight: 'bold' }}>
-                  选择代币类型
+                  Select Token Type
                 </label>
                 <select
                   value={selectedToken}
@@ -278,7 +278,7 @@ export function TokenMinter() {
 
               <div>
                 <label style={{ display: 'block', marginBottom: '6px', color: '#374151', fontWeight: 'bold' }}>
-                  充值数量
+                  Fund Amount
                 </label>
                 <input
                   type="number"
@@ -310,11 +310,11 @@ export function TokenMinter() {
                   fontWeight: 'bold'
                 }}
               >
-                {loading === 'deposit' ? '充值中...' : '充值到空投合约'}
+                {loading === 'deposit' ? 'Funding...' : 'Fund Airdrop Contract'}
               </button>
 
               <div style={{ fontSize: '12px', color: '#6b7280', marginTop: '8px' }}>
-                <strong>目标地址:</strong><br />
+                <strong>Target Address:</strong><br />
                 <span style={{ fontFamily: 'monospace', wordBreak: 'break-all' }}>
                   {CONTRACT_ADDRESSES.InvisibleDrop}
                 </span>
@@ -331,13 +331,13 @@ export function TokenMinter() {
           borderRadius: '8px',
           color: '#1e40af'
         }}>
-          <h4 style={{ margin: '0 0 8px 0' }}>💡 使用提示</h4>
+          <h4 style={{ margin: '0 0 8px 0' }}>💡 Usage Tips</h4>
           <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '14px' }}>
-            <li>TestToken 和 TestNFT 可用作空投的领取条件</li>
-            <li>ConfidentialCoin 用作空投的奖励代币</li>
-            <li>空投合约充值功能可直接mint代币到合约地址</li>
-            <li>所有代币都部署在 Sepolia 测试网</li>
-            <li>铸造是免费的，仅需支付 Gas 费用</li>
+            <li>TestToken and TestNFT can be used as airdrop claiming conditions</li>
+            <li>ConfidentialCoin is used as airdrop reward tokens</li>
+            <li>Airdrop contract funding can mint tokens directly to contract address</li>
+            <li>All tokens are deployed on Sepolia testnet</li>
+            <li>Minting is free, only gas fees required</li>
           </ul>
         </div>
     </div>
