@@ -136,17 +136,31 @@ export function BalanceViewer() {
         alignItems: 'center',
         marginBottom: '24px'
       }}>
-        <h2 style={{ color: '#1f2937', margin: 0 }}>My Wallet Balance</h2>
+        <h2 style={{
+          color: '#1e293b',
+          margin: 0,
+          fontSize: '1.8rem',
+          fontWeight: '700',
+          background: 'linear-gradient(135deg, #667eea, #764ba2)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent'
+        }}>💰 My Wallet Balance</h2>
         <button
           onClick={loadPublicBalances}
           disabled={loading}
           style={{
             padding: '8px 16px',
-            backgroundColor: loading ? '#9ca3af' : '#f3f4f6',
-            border: '1px solid #d1d5db',
-            borderRadius: '6px',
+            background: loading
+              ? 'linear-gradient(135deg, #9ca3af, #6b7280)'
+              : 'linear-gradient(135deg, #667eea, #764ba2)',
+            color: 'white',
+            border: 'none',
+            borderRadius: '12px',
             cursor: loading ? 'not-allowed' : 'pointer',
-            fontSize: '14px'
+            fontSize: '14px',
+            fontWeight: '600',
+            boxShadow: '0 4px 15px rgba(102, 126, 234, 0.2)',
+            transition: 'all 0.3s ease'
           }}
         >
           {loading ? '🔄 Refreshing...' : '🔄 Refresh Balance'}
@@ -155,13 +169,19 @@ export function BalanceViewer() {
 
       {/* Current wallet address */}
       <div style={{
-        backgroundColor: '#f9fafb',
-        padding: '16px',
-        border: '1px solid #e5e7eb',
-        borderRadius: '8px',
-        marginBottom: '24px'
+        background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1))',
+        padding: '20px',
+        border: '1px solid rgba(102, 126, 234, 0.2)',
+        borderRadius: '16px',
+        marginBottom: '24px',
+        backdropFilter: 'blur(10px)'
       }}>
-        <h4 style={{ margin: '0 0 8px 0', color: '#374151' }}>Wallet Address</h4>
+        <h4 style={{
+          margin: '0 0 12px 0',
+          color: '#1e293b',
+          fontSize: '1.1rem',
+          fontWeight: '600'
+        }}>🔗 Wallet Address</h4>
         <div style={{
           fontFamily: 'monospace',
           fontSize: '14px',

@@ -83,18 +83,37 @@ export function AirdropManager() {
 
   return (
     <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-      <h2 style={{ color: '#1f2937', marginBottom: '24px' }}>Create New Airdrop</h2>
+      <h2 style={{
+        color: '#1e293b',
+        marginBottom: '32px',
+        fontSize: '1.8rem',
+        fontWeight: '700',
+        background: 'linear-gradient(135deg, #667eea, #764ba2)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        textAlign: 'center'
+      }}>✨ Create New Airdrop</h2>
 
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
 
         {/* Basic information */}
         <div style={{
-          backgroundColor: 'white',
-          padding: '24px',
-          border: '1px solid #e5e7eb',
-          borderRadius: '12px'
+          background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8))',
+          padding: '28px',
+          border: '1px solid rgba(102, 126, 234, 0.1)',
+          borderRadius: '20px',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+          backdropFilter: 'blur(10px)'
         }}>
-          <h3 style={{ color: '#374151', margin: '0 0 16px 0' }}>Basic Information</h3>
+          <h3 style={{
+            color: '#1e293b',
+            margin: '0 0 20px 0',
+            fontSize: '1.3rem',
+            fontWeight: '700',
+            background: 'linear-gradient(135deg, #667eea, #764ba2)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}>📈 Basic Information</h3>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div>

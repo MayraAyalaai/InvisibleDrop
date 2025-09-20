@@ -142,16 +142,28 @@ export function AirdropList() {
         alignItems: 'center',
         marginBottom: '20px'
       }}>
-        <h2 style={{ color: '#1f2937', margin: 0 }}>Airdrop List</h2>
+        <h2 style={{
+          color: '#1e293b',
+          margin: 0,
+          fontSize: '1.8rem',
+          fontWeight: '700',
+          background: 'linear-gradient(135deg, #667eea, #764ba2)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent'
+        }}>🎁 Airdrop List</h2>
         <button
           onClick={loadAirdrops}
           style={{
-            padding: '8px 16px',
-            backgroundColor: '#f3f4f6',
-            border: '1px solid #d1d5db',
-            borderRadius: '6px',
+            padding: '10px 20px',
+            background: 'linear-gradient(135deg, #667eea, #764ba2)',
+            color: 'white',
+            border: 'none',
+            borderRadius: '12px',
             cursor: 'pointer',
-            fontSize: '14px'
+            fontSize: '14px',
+            fontWeight: '600',
+            boxShadow: '0 4px 15px rgba(102, 126, 234, 0.3)',
+            transition: 'all 0.3s ease'
           }}
         >
           🔄 Refresh
@@ -163,25 +175,38 @@ export function AirdropList() {
           <div
             key={airdrop.id}
             style={{
-              backgroundColor: 'white',
-              border: '1px solid #e5e7eb',
-              borderRadius: '12px',
-              padding: '24px',
-              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)'
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9))',
+              border: '1px solid rgba(102, 126, 234, 0.1)',
+              borderRadius: '20px',
+              padding: '28px',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+              backdropFilter: 'blur(10px)',
+              transition: 'all 0.3s ease',
+              ':hover': {
+                transform: 'translateY(-4px)',
+                boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)'
+              }
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div style={{ flex: 1 }}>
-                <h3 style={{ color: '#1f2937', margin: '0 0 12px 0' }}>
+                <h3 style={{
+                  color: '#1e293b',
+                  margin: '0 0 16px 0',
+                  fontSize: '1.4rem',
+                  fontWeight: '700'
+                }}>
                   Airdrop #{airdrop.id}
                   {airdrop.isActive ? (
                     <span style={{
-                      backgroundColor: '#10b981',
+                      background: 'linear-gradient(135deg, #10b981, #059669)',
                       color: 'white',
-                      padding: '2px 8px',
-                      borderRadius: '12px',
+                      padding: '4px 12px',
+                      borderRadius: '20px',
                       fontSize: '12px',
-                      marginLeft: '8px'
+                      marginLeft: '8px',
+                      fontWeight: '600',
+                      boxShadow: '0 2px 8px rgba(16, 185, 129, 0.3)'
                     }}>
                       Active
                     </span>

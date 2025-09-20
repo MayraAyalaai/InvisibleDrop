@@ -90,8 +90,21 @@ export function TokenMinter() {
   return (
     <div>
       <div style={{ marginBottom: '24px' }}>
-        <h2 style={{ color: '#1f2937', margin: 0 }}>Token Minting</h2>
-        <p style={{ color: '#6b7280', margin: '8px 0 0 0', fontSize: '14px' }}>
+        <h2 style={{
+          color: '#1e293b',
+          margin: 0,
+          fontSize: '1.8rem',
+          fontWeight: '700',
+          background: 'linear-gradient(135deg, #667eea, #764ba2)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent'
+        }}>🪙 Token Minting</h2>
+        <p style={{
+          color: '#64748b',
+          margin: '12px 0 0 0',
+          fontSize: '1.1rem',
+          fontWeight: '500'
+        }}>
           Mint test tokens and fund airdrop contracts with reward tokens
         </p>
       </div>
@@ -100,12 +113,23 @@ export function TokenMinter() {
 
           {/* TestToken minting */}
           <div style={{
-            backgroundColor: 'white',
-            padding: '24px',
-            border: '1px solid #e5e7eb',
-            borderRadius: '12px'
+            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8))',
+            padding: '28px',
+            border: '1px solid rgba(16, 185, 129, 0.2)',
+            borderRadius: '20px',
+            boxShadow: '0 8px 32px rgba(16, 185, 129, 0.1)',
+            backdropFilter: 'blur(10px)',
+            transition: 'all 0.3s ease'
           }}>
-            <h3 style={{ color: '#374151', margin: '0 0 16px 0' }}>🪙 TestToken</h3>
+            <h3 style={{
+              color: '#1e293b',
+              margin: '0 0 16px 0',
+              fontSize: '1.3rem',
+              fontWeight: '700',
+              background: 'linear-gradient(135deg, #10b981, #059669)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
+            }}>🪙 TestToken</h3>
             <p style={{ color: '#6b7280', margin: '0 0 16px 0', fontSize: '14px' }}>
               ERC20 token for testing, can be used as airdrop conditions
             </p>
