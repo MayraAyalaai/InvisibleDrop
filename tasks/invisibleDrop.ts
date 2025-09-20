@@ -22,7 +22,7 @@ task("create-airdrop", "Create a new airdrop")
       minTokenAmount,
     } = taskArgs;
 
-    const invisibleDropAddress = "0x0165878A594ca255338adfa4d48449f69242Eb8F";
+    const invisibleDropAddress = "0xCb96848DD60c987e67D406A3da966F63270dbA7b";
     const InvisibleDrop = await hre.ethers.getContractFactory("InvisibleDrop");
     const invisibleDrop = InvisibleDrop.attach(invisibleDropAddress);
 
@@ -74,7 +74,7 @@ task("check-eligibility", "Check if user is eligible for airdrop")
   .setAction(async (taskArgs, hre: HardhatRuntimeEnvironment) => {
     const { airdropId, user } = taskArgs;
 
-    const invisibleDropAddress = "0x0165878A594ca255338adfa4d48449f69242Eb8F";
+    const invisibleDropAddress = "0xCb96848DD60c987e67D406A3da966F63270dbA7b";
     const InvisibleDrop = await hre.ethers.getContractFactory("InvisibleDrop");
     const invisibleDrop = InvisibleDrop.attach(invisibleDropAddress);
 
@@ -91,7 +91,7 @@ task("check-claimable", "Check claimable amount for user")
   .setAction(async (taskArgs, hre: HardhatRuntimeEnvironment) => {
     const { airdropId, user } = taskArgs;
 
-    const invisibleDropAddress = "0x0165878A594ca255338adfa4d48449f69242Eb8F";
+    const invisibleDropAddress = "0xCb96848DD60c987e67D406A3da966F63270dbA7b";
     const InvisibleDrop = await hre.ethers.getContractFactory("InvisibleDrop");
     const invisibleDrop = InvisibleDrop.attach(invisibleDropAddress);
 
@@ -107,7 +107,7 @@ task("claim-reward", "Claim airdrop reward")
   .setAction(async (taskArgs, hre: HardhatRuntimeEnvironment) => {
     const { airdropId } = taskArgs;
 
-    const invisibleDropAddress = "0x0165878A594ca255338adfa4d48449f69242Eb8F";
+    const invisibleDropAddress = "0xCb96848DD60c987e67D406A3da966F63270dbA7b";
     const InvisibleDrop = await hre.ethers.getContractFactory("InvisibleDrop");
     const invisibleDrop = InvisibleDrop.attach(invisibleDropAddress);
 
@@ -126,7 +126,7 @@ task("airdrop-info", "Get airdrop information")
   .setAction(async (taskArgs, hre: HardhatRuntimeEnvironment) => {
     const { airdropId } = taskArgs;
 
-    const invisibleDropAddress = "0x0165878A594ca255338adfa4d48449f69242Eb8F";
+    const invisibleDropAddress = "0xCb96848DD60c987e67D406A3da966F63270dbA7b";
     const InvisibleDrop = await hre.ethers.getContractFactory("InvisibleDrop");
     const invisibleDrop = InvisibleDrop.attach(invisibleDropAddress);
 
@@ -156,7 +156,7 @@ task("user-claim-info", "Get user claim information")
   .setAction(async (taskArgs, hre: HardhatRuntimeEnvironment) => {
     const { airdropId, user } = taskArgs;
 
-    const invisibleDropAddress = "0x0165878A594ca255338adfa4d48449f69242Eb8F";
+    const invisibleDropAddress = "0xCb96848DD60c987e67D406A3da966F63270dbA7b";
     const InvisibleDrop = await hre.ethers.getContractFactory("InvisibleDrop");
     const invisibleDrop = InvisibleDrop.attach(invisibleDropAddress);
 
@@ -171,7 +171,7 @@ task("user-claim-info", "Get user claim information")
 
 task("invisibleDrop-info", "Get InvisibleDrop contract information")
   .setAction(async (taskArgs, hre: HardhatRuntimeEnvironment) => {
-    const invisibleDropAddress = "0x0165878A594ca255338adfa4d48449f69242Eb8F";
+    const invisibleDropAddress = "0xCb96848DD60c987e67D406A3da966F63270dbA7b";
     const InvisibleDrop = await hre.ethers.getContractFactory("InvisibleDrop");
     const invisibleDrop = InvisibleDrop.attach(invisibleDropAddress);
 

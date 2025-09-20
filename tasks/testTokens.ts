@@ -8,7 +8,7 @@ task("mint-test-token", "Mint TestToken tokens")
     const { to, amount } = taskArgs;
 
     // Get the deployed contract
-    const testTokenAddress = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9";
+    const testTokenAddress = "0xD6e81e78930259e66a2f4b363D84a6Ec0BeCd2c6";
     const TestToken = await hre.ethers.getContractFactory("TestToken");
     const testToken = TestToken.attach(testTokenAddress);
 
@@ -28,7 +28,7 @@ task("mint-test-nft", "Mint TestNFT tokens")
     const { to, uri } = taskArgs;
 
     // Get the deployed contract
-    const testNFTAddress = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
+    const testNFTAddress = "0x37914fAD5322Df6e701Be562BC9aff90F5fE928D";
     const TestNFT = await hre.ethers.getContractFactory("TestNFT");
     const testNFT = TestNFT.attach(testNFTAddress);
 

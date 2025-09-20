@@ -8,7 +8,7 @@ task("mint-coin1", "Mint ConfidentialCoin1 tokens")
     const { to, amount } = taskArgs;
 
     // Get the deployed contract
-    const coin1Address = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0";
+    const coin1Address = "0x36De2Ed8465ad8976D2D2be399aeF29f612b3d9E";
     const ConfidentialCoin1 = await hre.ethers.getContractFactory("ConfidentialCoin1");
     const coin1 = ConfidentialCoin1.attach(coin1Address);
 
@@ -28,7 +28,7 @@ task("mint-coin2", "Mint ConfidentialCoin2 tokens")
     const { to, amount } = taskArgs;
 
     // Get the deployed contract
-    const coin2Address = "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9";
+    const coin2Address = "0xC50E8c96a2e6a11BA7F27B541617981B66256071";
     const ConfidentialCoin2 = await hre.ethers.getContractFactory("ConfidentialCoin2");
     const coin2 = ConfidentialCoin2.attach(coin2Address);
 
