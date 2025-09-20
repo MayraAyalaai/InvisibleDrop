@@ -358,7 +358,7 @@ export function BalanceViewer() {
                     fontWeight: 'bold'
                   }}
                 >
-                  {decryptingCoin2 ? 'Decrypting...' : '🔓 Click to Decrypt'}
+                  {decryptingCoin2 ? 'Decrypting...' : '🔓Click to Decrypt'}
                 </button>
               </div>
             )}
