@@ -91,27 +91,6 @@ contract InvisibleDrop is SepoliaConfig {
         return airdropId;
     }
 
-    // 空投方充值代币
-    function depositRewards(uint256 _airdropId, externalEuint64 _amount, bytes calldata _inputProof) external {
-        require(_airdropId < airdropCount, "Invalid airdrop ID");
-        AirdropConfig storage airdrop = airdrops[_airdropId];
-        require(msg.sender == airdrop.airdropper, "Only airdropper can deposit");
-        require(airdrop.isActive, "Airdrop not active");
-
-        // 从空投方转移代币到合约
-        euint64 transferred = airdrop.rewardToken.confidentialTransferFrom(
-            msg.sender,
-            address(this),
-            _amount,
-            _inputProof
-        );
-
-        // 设置访问权限
-        FHE.allowThis(transferred);
-
-        emit RewardsDeposited(_airdropId, msg.sender);
-    }
-
     // 检查用户是否满足条件
     function checkEligibility(uint256 _airdropId, address _user) public view returns (bool) {
         require(_airdropId < airdropCount, "Invalid airdrop ID");
@@ -177,6 +156,7 @@ contract InvisibleDrop is SepoliaConfig {
             euint64 claimAmount = FHE.asEuint64(airdrop.rewardPerUser);
 
             // 转移代币 - 从合约余额转给用户
+            FHE.allowTransient(claimAmount, address(airdrop.rewardToken));
             euint64 transferred = airdrop.rewardToken.confidentialTransfer(msg.sender, claimAmount);
 
             // 设置访问权限
