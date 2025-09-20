@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
 import { TokenService } from '../services/tokens';
+import { CONTRACT_ADDRESSES } from '../contracts/contracts';
 
 interface UserBalances {
   testToken: string;
@@ -18,6 +19,8 @@ export function TokenMinter() {
   const [nftUri, setNftUri] = useState('https://example.com/token/');
   const [confidentialCoin1Amount, setConfidentialCoin1Amount] = useState('5000');
   const [confidentialCoin2Amount, setConfidentialCoin2Amount] = useState('5000');
+  const [depositAmount, setDepositAmount] = useState('1000');
+  const [selectedToken, setSelectedToken] = useState<'ConfidentialCoin1' | 'ConfidentialCoin2'>('ConfidentialCoin1');
 
   // 加载用户余额
   const loadBalances = async () => {
@@ -125,6 +128,26 @@ export function TokenMinter() {
     } catch (error) {
       console.error('铸造 ConfidentialCoin2 失败:', error);
       alert('铸造失败');
+    } finally {
+      setLoading(null);
+    }
+  };
+
+  // 给空投合约充值
+  const handleDepositToAirdrop = async () => {
+    try {
+      setLoading('deposit');
+      const result = await TokenService.depositToAirdrop(selectedToken, depositAmount);
+
+      if (result.success) {
+        alert(result.message);
+        setDepositAmount('1000');
+      } else {
+        alert(`充值失败: ${result.error}`);
+      }
+    } catch (error) {
+      console.error('充值到空投合约失败:', error);
+      alert('充值失败');
     } finally {
       setLoading(null);
     }
@@ -359,6 +382,86 @@ export function TokenMinter() {
                     {loading === 'coin2' ? '铸造中...' : '铸造'}
                   </button>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 空投合约充值 */}
+          <div style={{
+            backgroundColor: 'white',
+            padding: '24px',
+            border: '1px solid #e5e7eb',
+            borderRadius: '12px'
+          }}>
+            <h3 style={{ color: '#374151', margin: '0 0 16px 0' }}>🎁 空投合约充值</h3>
+            <p style={{ color: '#6b7280', margin: '0 0 16px 0', fontSize: '14px' }}>
+              直接向空投合约mint代币，用于空投奖励分发
+            </p>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#374151', fontWeight: 'bold' }}>
+                  选择代币类型
+                </label>
+                <select
+                  value={selectedToken}
+                  onChange={(e) => setSelectedToken(e.target.value as 'ConfidentialCoin1' | 'ConfidentialCoin2')}
+                  style={{
+                    width: '100%',
+                    padding: '10px',
+                    border: '1px solid #d1d5db',
+                    borderRadius: '6px',
+                    fontSize: '14px',
+                    backgroundColor: 'white'
+                  }}
+                >
+                  <option value="ConfidentialCoin1">ConfidentialCoin1</option>
+                  <option value="ConfidentialCoin2">ConfidentialCoin2</option>
+                </select>
+              </div>
+
+              <div>
+                <label style={{ display: 'block', marginBottom: '6px', color: '#374151', fontWeight: 'bold' }}>
+                  充值数量
+                </label>
+                <input
+                  type="number"
+                  value={depositAmount}
+                  onChange={(e) => setDepositAmount(e.target.value)}
+                  min="1"
+                  style={{
+                    width: '100%',
+                    padding: '10px',
+                    border: '1px solid #d1d5db',
+                    borderRadius: '6px',
+                    fontSize: '14px'
+                  }}
+                  placeholder="1000"
+                />
+              </div>
+
+              <button
+                onClick={handleDepositToAirdrop}
+                disabled={loading === 'deposit'}
+                style={{
+                  width: '100%',
+                  padding: '12px',
+                  backgroundColor: loading === 'deposit' ? '#9ca3af' : '#3b82f6',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '8px',
+                  cursor: loading === 'deposit' ? 'not-allowed' : 'pointer',
+                  fontWeight: 'bold'
+                }}
+              >
+                {loading === 'deposit' ? '充值中...' : '充值到空投合约'}
+              </button>
+
+              <div style={{ fontSize: '12px', color: '#6b7280', marginTop: '8px' }}>
+                <strong>目标地址:</strong><br />
+                <span style={{ fontFamily: 'monospace', wordBreak: 'break-all' }}>
+                  {CONTRACT_ADDRESSES.InvisibleDrop}
+                </span>
               </div>
             </div>
           </div>

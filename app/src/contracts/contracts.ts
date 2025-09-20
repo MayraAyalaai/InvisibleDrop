@@ -9,7 +9,7 @@ import TestNFTABI from './TestNFT.abi.json';
 
 // Sepolia 合约地址
 export const CONTRACT_ADDRESSES = {
-  InvisibleDrop: '0xCb96848DD60c987e67D406A3da966F63270dbA7b',
+  InvisibleDrop: '0x106F22a583E2e452BD3410851CBeA9DB025fB438',
   ConfidentialCoin1: '0x36De2Ed8465ad8976D2D2be399aeF29f612b3d9E',
   ConfidentialCoin2: '0xC50E8c96a2e6a11BA7F27B541617981B66256071',
   TestToken: '0xD6e81e78930259e66a2f4b363D84a6Ec0BeCd2c6',

@@ -202,28 +202,4 @@ export class InvisibleDropService {
     }
   }
 
-  // 充值奖励代币 (需要 FHE 加密输入)
-  static async depositRewards(airdropId: number, amount: string, inputProof: string) {
-    try {
-      const contract = await getContractWrite('InvisibleDrop');
-
-      // 这里需要使用 @zama-fhe/relayer-sdk 来创建加密输入
-      // 暂时使用明文金额，实际使用时需要加密
-      const tx = await contract.depositRewards(airdropId, amount, inputProof);
-      console.log('充值奖励交易已提交:', tx.hash);
-
-      await waitForTransaction(tx.hash);
-
-      return {
-        success: true,
-        txHash: tx.hash,
-        message: '奖励充值成功！'
-      };
-    } catch (error) {
-      return {
-        success: false,
-        error: formatError(error)
-      };
-    }
-  }
 }

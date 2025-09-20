@@ -290,7 +290,7 @@ export function AirdropManager() {
       }}>
         <h4 style={{ margin: '0 0 8px 0' }}>⚠️ 注意事项</h4>
         <ul style={{ margin: 0, paddingLeft: '20px' }}>
-          <li>创建空投后需要充值奖励代币到合约</li>
+          <li>创建空投后需要在"代币铸造"页面给空投合约充值奖励代币</li>
           <li>确保奖励代币合约地址正确</li>
           <li>条件设置后无法修改，请仔细检查</li>
           <li>空投创建后立即生效，用户可以开始领取</li>

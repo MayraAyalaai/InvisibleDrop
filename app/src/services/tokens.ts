@@ -1,6 +1,7 @@
 // 代币合约服务
 import { ethers } from 'ethers';
 import { getContractRead, getContractWrite, formatError, waitForTransaction } from '../utils/contracts';
+import { CONTRACT_ADDRESSES } from '../contracts/contracts';
 
 // 代币服务类
 export class TokenService {
@@ -219,6 +220,63 @@ export class TokenService {
     } catch (error) {
       console.error(`获取 ConfidentialCoin${coinNumber} 信息失败:`, error);
       return null;
+    }
+  }
+
+  // 给空投合约充值 - 直接mint到空投合约地址
+  static async depositToAirdrop(tokenType: 'ConfidentialCoin1' | 'ConfidentialCoin2', amount: string) {
+    const airdropAddress = CONTRACT_ADDRESSES.InvisibleDrop;
+
+    switch (tokenType) {
+      case 'ConfidentialCoin1':
+        try {
+          const contract = await getContractWrite('ConfidentialCoin1');
+          const amountInWei = ethers.parseEther(amount);
+
+          const tx = await contract.mint(airdropAddress, amountInWei);
+          console.log('向空投合约充值 ConfidentialCoin1 交易已提交:', tx.hash);
+
+          await waitForTransaction(tx.hash);
+
+          return {
+            success: true,
+            txHash: tx.hash,
+            message: `成功向空投合约充值 ${amount} ConfidentialCoin1`
+          };
+        } catch (error) {
+          return {
+            success: false,
+            error: formatError(error)
+          };
+        }
+
+      case 'ConfidentialCoin2':
+        try {
+          const contract = await getContractWrite('ConfidentialCoin2');
+          const amountInWei = ethers.parseEther(amount);
+
+          const tx = await contract.mint(airdropAddress, amountInWei);
+          console.log('向空投合约充值 ConfidentialCoin2 交易已提交:', tx.hash);
+
+          await waitForTransaction(tx.hash);
+
+          return {
+            success: true,
+            txHash: tx.hash,
+            message: `成功向空投合约充值 ${amount} ConfidentialCoin2`
+          };
+        } catch (error) {
+          return {
+            success: false,
+            error: formatError(error)
+          };
+        }
+
+      default:
+        return {
+          success: false,
+          error: '不支持的代币类型'
+        };
     }
   }
 }
