@@ -34,7 +34,7 @@ export function InvisibleDropApp() {
             color: '#6b7280',
             margin: '5px 0 0 0'
           }}>
-            Privacy Airdrop Platform - Powered by Zama FHE
+            Privacy Airdrop Platform - Powered by Zama
           </p>
         </div>
         <ConnectButton />
@@ -121,7 +121,7 @@ export function InvisibleDropApp() {
         fontSize: '14px'
       }}>
         <p>
-          InvisibleDrop - Privacy Airdrop Platform Based on Zama FHE |
+          InvisibleDrop - Privacy Airdrop Platform Based on Zama |
           <a
             href="https://docs.zama.ai"
             target="_blank"
