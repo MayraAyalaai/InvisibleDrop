@@ -10,8 +10,6 @@ export function TokenMinter() {
   // 表单状态
   const [testTokenAmount, setTestTokenAmount] = useState('1000');
   const [nftUri, setNftUri] = useState('https://example.com/token/');
-  const [confidentialCoin1Amount, setConfidentialCoin1Amount] = useState('5000');
-  const [confidentialCoin2Amount, setConfidentialCoin2Amount] = useState('5000');
   const [depositAmount, setDepositAmount] = useState('1000');
   const [selectedToken, setSelectedToken] = useState<'ConfidentialCoin1' | 'ConfidentialCoin2'>('ConfidentialCoin1');
 
@@ -59,49 +57,6 @@ export function TokenMinter() {
     }
   };
 
-  // 铸造 ConfidentialCoin1
-  const handleMintConfidentialCoin1 = async () => {
-    if (!address) return;
-
-    try {
-      setLoading('coin1');
-      const result = await TokenService.mintConfidentialCoin1(address, Number(confidentialCoin1Amount));
-
-      if (result.success) {
-        alert(result.message);
-        setConfidentialCoin1Amount('5000');
-      } else {
-        alert(`铸造失败: ${result.error}`);
-      }
-    } catch (error) {
-      console.error('铸造 ConfidentialCoin1 失败:', error);
-      alert('铸造失败');
-    } finally {
-      setLoading(null);
-    }
-  };
-
-  // 铸造 ConfidentialCoin2
-  const handleMintConfidentialCoin2 = async () => {
-    if (!address) return;
-
-    try {
-      setLoading('coin2');
-      const result = await TokenService.mintConfidentialCoin2(address, Number(confidentialCoin2Amount));
-
-      if (result.success) {
-        alert(result.message);
-        setConfidentialCoin2Amount('5000');
-      } else {
-        alert(`铸造失败: ${result.error}`);
-      }
-    } catch (error) {
-      console.error('铸造 ConfidentialCoin2 失败:', error);
-      alert('铸造失败');
-    } finally {
-      setLoading(null);
-    }
-  };
 
   // 给空投合约充值
   const handleDepositToAirdrop = async () => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useAccount } from 'wagmi';
 import { InvisibleDropService } from '../services/invisibleDrop';
 import type {AirdropConfig } from '../services/invisibleDrop';

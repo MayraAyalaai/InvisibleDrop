@@ -68,17 +68,15 @@ export class FHEService {
 
       return decryptedValue ? decryptedValue.toString() : '0';
 
-    } catch (error) {
+    } catch (error: any) {
       console.error(`解密 ${tokenType} 余额失败:`, error);
       throw new Error('解密失败: ' + error.message);
     }
   }
 
   // 检查用户是否有权限解密
-  static async canDecrypt(tokenType: 'ConfidentialCoin1' | 'ConfidentialCoin2', userAddress: string): Promise<boolean> {
+  static async canDecrypt(): Promise<boolean> {
     try {
-      const contract = getContractRead(tokenType);
-
       // 检查用户是否有访问权限
       // 这里需要调用合约的 ACL 检查方法
       // 目前返回 true，表示所有用户都可以解密自己的余额

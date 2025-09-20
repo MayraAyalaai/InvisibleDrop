@@ -64,7 +64,7 @@ export function BalanceViewer() {
       setConfidentialBalances(prev => ({ ...prev, coin1: balance }));
 
       // alert(`ConfidentialCoin1 余额解密成功: ${balance}`);
-    } catch (error) {
+    } catch (error: any) {
       console.error('解密 ConfidentialCoin1 余额失败:', error);
       alert('Decryption failed, please try again: ' + error.message);
     }
@@ -85,7 +85,7 @@ export function BalanceViewer() {
       setConfidentialBalances(prev => ({ ...prev, coin2: balance }));
 
       // alert(`ConfidentialCoin2 余额解密成功: ${balance}`);
-    } catch (error) {
+    } catch (error: any) {
       console.error('解密 ConfidentialCoin2 余额失败:', error);
       alert('Decryption failed, please try again: ' + error.message);
     }
