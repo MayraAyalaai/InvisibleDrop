@@ -10,8 +10,9 @@ import { vars } from "hardhat/config";
 import "solidity-coverage";
 
 import "./tasks/accounts";
-import "./tasks/FHECounter";
-import "./tasks/airdrop";
+import "./tasks/confidentialCoin";
+import "./tasks/testTokens";
+import "./tasks/invisibleDrop";
 
 // Run 'npx hardhat vars setup' to see the list of variables that need to be set
 
@@ -38,6 +39,10 @@ const config: HardhatUserConfig = {
       accounts: {
         mnemonic: MNEMONIC,
       },
+      chainId: 31337,
+    },
+    localhost: {
+      url: "http://127.0.0.1:8545",
       chainId: 31337,
     },
     anvil: {
