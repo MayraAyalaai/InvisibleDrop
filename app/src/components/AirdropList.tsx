@@ -174,18 +174,9 @@ export function AirdropList() {
         {airdrops.map((airdrop) => (
           <div
             key={airdrop.id}
+            className="glass-card"
             style={{
-              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9))',
-              border: '1px solid rgba(102, 126, 234, 0.1)',
-              borderRadius: '20px',
-              padding: '28px',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-              backdropFilter: 'blur(10px)',
-              transition: 'all 0.3s ease',
-              ':hover': {
-                transform: 'translateY(-4px)',
-                boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)'
-              }
+              padding: '28px'
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
